@@ -9,7 +9,7 @@ class Faculties
     public function get()
     {
         $faculties = Faculty::get();
-        $facultiesArray[''] = 'Selecciona una facultad';
+        //$facultiesArray[''] = 'Selecciona una facultad';
         foreach ($faculties as $faculty) {
             $facultiesArray[$faculty->id] = $faculty->name;
         }

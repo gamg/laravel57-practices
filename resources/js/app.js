@@ -29,7 +29,18 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+   	data: {
+   		faculty: null,
+   		careers: null,
+   	},
+   	methods: {
+   		loadCareer() {
+   			axios.get('careers', {params: {faculty_id: this.faculty}}).then((response) => {
+				this.careers =  response.data;
+			});
+   		}	
+   	}
 });
 
-require('./career');
+//require('./career');
