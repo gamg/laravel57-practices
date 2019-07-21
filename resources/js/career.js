@@ -1,20 +1,34 @@
-$(document).ready(function(){
-    function loadCareer() {
-        var faculty_id = $('#faculty').val();
-        if ($.trim(faculty_id) != '') {
-            $.get('careers', {faculty_id: faculty_id}, function (careers) {
+const app = new Vue({
+    el: '#app',
+    data: {
+        selected_faculty: '',
+        selected_career: '',
+        careers: null,
+    },
+    mounted() {
+        document.getElementById("career").disabled=true;
 
-                var old = $('#career').data('old') != '' ? $('#career').data('old') : '';
+        this.selected_faculty = this.getOldData('faculty');
+        if (this.selected_faculty != '') {
+            this.loadCareer();
+        }
 
-                $('#career').empty();
-                $('#career').append("<option value=''>Selecciona una carrera</option>");
+        this.selected_career = this.getOldData('career');
+    },
+    methods: {
+        loadCareer() {
+            this.selected_career = '';
+            document.getElementById("career").disabled=true;
 
-                $.each(careers, function (index, value) {
-                    $('#career').append("<option value='" + index + "'" + (old == index ? 'selected' : '') + ">" + value +"</option>");
-                })
-            });
+            if (this.selected_faculty != '') {
+                axios.get('careers', {params: {faculty_id: this.selected_faculty}}).then((response) => {
+                    this.careers = response.data;
+                    document.getElementById("career").disabled=false;
+                });
+            }
+        },
+        getOldData(type) {
+            return document.getElementById(type).getAttribute("data-old");
         }
     }
-    loadCareer();
-    $('#faculty').on('change', loadCareer);
 });

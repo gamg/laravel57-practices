@@ -44,10 +44,9 @@
                                 <label for="faculty" class="col-md-4 col-form-label text-md-right">Facultad</label>
 
                                 <div class="col-md-6">
-                                    <select v-model='faculty' @change="loadCareer" id="faculty" name="faculty_id" class="form-control{{ $errors->has('faculty_id') ? ' is-invalid' : '' }}">
-                                        <option value="" selected>Selecciona una facultad</option>
+                                    <select v-model="selected_faculty" @change="loadCareer" id="faculty" data-old="{{ old('faculty_id') }}"name="faculty_id" class="form-control{{ $errors->has('faculty_id') ? ' is-invalid' : '' }}">
                                         @foreach($faculties->get() as $index => $faculty)
-                                            <option value="{{ $index }}" {{ old('faculty_id') == $index ? 'selected' : '' }}>
+                                            <option value="{{ $index }}">
                                                 {{ $faculty }}
                                             </option>
                                         @endforeach
@@ -65,9 +64,9 @@
                                 <label for="career" class="col-md-4 col-form-label text-md-right">Carrera</label>
 
                                 <div class="col-md-6">
-                                    <select id="career" data-old="{{ old('career_id') }}" name="career_id" class="form-control{{ $errors->has('career_id') ? ' is-invalid' : '' }}">
+                                    <select v-model="selected_career" id="career" data-old="{{ old('career_id') }}" name="career_id" class="form-control{{ $errors->has('career_id') ? ' is-invalid' : '' }}">
                                         <option value="">Selecciona una carrera</option>
-                                        <option v-for="(career, index) in careers" :value="index">
+                                        <option v-for="(career, index) in careers" v-bind:value="index">
                                             @{{career}}
                                         </option>>
                                     </select>

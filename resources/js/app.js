@@ -28,19 +28,4 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-   	data: {
-   		faculty: null,
-   		careers: null,
-   	},
-   	methods: {
-   		loadCareer() {
-   			axios.get('careers', {params: {faculty_id: this.faculty}}).then((response) => {
-				this.careers =  response.data;
-			});
-   		}	
-   	}
-});
-
-//require('./career');
+require('./career');
