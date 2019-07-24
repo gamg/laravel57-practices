@@ -44,7 +44,7 @@
                                 <label for="faculty" class="col-md-4 col-form-label text-md-right">Facultad</label>
 
                                 <div class="col-md-6">
-                                    <select v-model="selected_faculty" @change="loadCareer" id="faculty" data-old="{{ old('faculty_id') }}"name="faculty_id" class="form-control{{ $errors->has('faculty_id') ? ' is-invalid' : '' }}">
+                                    <select v-model="selected_faculty" @change="loadCareers" id="faculty" data-old="{{ old('faculty_id') }}"name="faculty_id" class="form-control{{ $errors->has('faculty_id') ? ' is-invalid' : '' }}">
                                         @foreach($faculties->get() as $index => $faculty)
                                             <option value="{{ $index }}">
                                                 {{ $faculty }}
